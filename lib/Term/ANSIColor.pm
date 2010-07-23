@@ -12,37 +12,40 @@ sub UNDERLINE_OFF is export { "\e[24m" }
 sub INVERSE_OFF   is export { "\e[27m" }
 
 my %attrs = 
-	reset      => "\e[0m",
-	bold       => "\e[1m",
-	underline  => "\e[4m",
-	inverse    => "\e[7m",
-	black      => "\e[30m",
-	red        => "\e[31m",
-	green      => "\e[32m",
-	yellow     => "\e[33m",
-	blue       => "\e[34m",
-	magenta    => "\e[35m",
-	cyan       => "\e[36m",
-	white      => "\e[37m",
-	default    => "\e[39m",
-	on_black   => "\e[40m",
-	on_red     => "\e[41m",
-	on_green   => "\e[42m",
-	on_yellow  => "\e[43m",
-	on_blue    => "\e[44m",
-	on_magenta => "\e[45m",
-	on_cyan    => "\e[46m",
-	on_white   => "\e[47m",
-	on_default => "\e[49m";
+	reset      => "0",
+	bold       => "1",
+	underline  => "4",
+	inverse    => "7",
+	black      => "30",
+	red        => "31",
+	green      => "32",
+	yellow     => "33",
+	blue       => "34",
+	magenta    => "35",
+	cyan       => "36",
+	white      => "37",
+	default    => "39",
+	on_black   => "40",
+	on_red     => "41",
+	on_green   => "42",
+	on_yellow  => "43",
+	on_blue    => "44",
+	on_magenta => "45",
+	on_cyan    => "46",
+	on_white   => "47",
+	on_default => "49";
 
 sub color (Str $what) is export {
 	my @res;
 	my @a = $what.split(' ');
 	for @a -> $attr {
-		my $buf = %attrs{$attr};
-		$buf ?? @res.push($buf) !! die("No such attribute: $attr");
+		if %attrs.exists($attr) {
+			@res.push(%attrs{$attr})
+		} else {
+			die("No such attribute: '$attr'")
+		}
 	}
-	return @res.join;
+	return "\e[" ~ @res.join(';') ~ "m";
 }
 
 sub colored (Str $what, Str $how) is export {
@@ -51,7 +54,7 @@ sub colored (Str $what, Str $how) is export {
 
 sub colorvalid (*@a) is export {
 	for @a -> $el {
-		return False unless %attrs{$sel}
+		return False unless %attrs.exists($el)
 	}
 	return True;
 }
@@ -60,12 +63,15 @@ sub colorvalid (*@a) is export {
 
 sub uncolor (Str $what) is export {
 	my @res;
-	my %flip = %attrs.reverse;
-	my @list = $what.split("\x[1b]");
+	# removing leading '\e[' and trailing 'm'
+	my $str = $what.substr(2).chop;
+	my @list = $str.split(';');
 	for @list -> $elem {
-		next if $elem eq '';
-		my $buf = %flip{"\e" ~ $elem};
-		$buf ?? @res.push($buf) !! die("No such sequence: {'\e'~$elem}");
+		if %attrs.reverse.exists($elem) {
+			@res.push(%attrs.reverse{$elem})
+		} else {
+			die("No such sequence: {'\e' ~ $elem ~ 'm'}")
+		}
 	}
 	return @res.join(' ');
 }
