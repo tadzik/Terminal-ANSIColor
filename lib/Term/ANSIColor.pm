@@ -36,15 +36,36 @@ my %attrs =
 	on_default => "\e[49m";
 
 sub color (Str $what) is export {
-	my $res;
+	my @res;
 	my @a = $what.split(' ');
 	for @a -> $attr {
 		my $buf = %attrs{$attr};
-		$buf ?? ($res ~= $buf) !! (die "No such attribute: $attr");
+		$buf ?? @res.push($buf) !! die("No such attribute: $attr");
 	}
-	return $res;
+	return @res.join;
 }
 
 sub colored (Str $what, Str $how) is export {
 	color($how) ~ $what ~ color('reset');
+}
+
+sub colorvalid (*@a) is export {
+	for @a -> $el {
+		return False unless %attrs{$sel}
+	}
+	return True;
+}
+
+# TBD: colorstrip() will come with s:g/// working
+
+sub uncolor (Str $what) is export {
+	my @res;
+	my %flip = %attrs.reverse;
+	my @list = $what.split("\x[1b]");
+	for @list -> $elem {
+		next if $elem eq '';
+		my $buf = %flip{"\e" ~ $elem};
+		$buf ?? @res.push($buf) !! die("No such sequence: {'\e'~$elem}");
+	}
+	return @res.join(' ');
 }
