@@ -63,14 +63,12 @@ sub colorvalid (*@a) is export {
 
 sub uncolor (Str $what) is export {
 	my @res;
-	# removing leading '\e[' and trailing 'm'
-	my $str = $what.substr(2).chop;
-	my @list = $str.split(';');
+	my @list = $what.comb(/\d+/);
 	for @list -> $elem {
 		if %attrs.reverse.exists($elem) {
 			@res.push(%attrs.reverse{$elem})
 		} else {
-			die("No such sequence: {'\e' ~ $elem ~ 'm'}")
+			die("No such sequence: {'\e[' ~ $elem ~ 'm'}")
 		}
 	}
 	return @res.join(' ');
