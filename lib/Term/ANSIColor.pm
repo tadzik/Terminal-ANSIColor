@@ -40,7 +40,7 @@ sub color (Str $what) is export {
 	my @a = $what.split(' ');
 	for @a -> $attr {
 		if %attrs.exists($attr) {
-			@res.push(%attrs{$attr})
+			@res.push: %attrs{$attr}
 		} else {
 			die("No such attribute: '$attr'")
 		}
@@ -59,14 +59,20 @@ sub colorvalid (*@a) is export {
 	return True;
 }
 
-# TBD: colorstrip() will come with s:g/// working
+sub colorstrip (*@a) is export {
+	my @res;
+	for @a -> $str {
+		@res.push: $str.subst(/\e\[ <[0..9;]>+ m/, '', :g);
+	}
+	return @res.join;
+}
 
 sub uncolor (Str $what) is export {
 	my @res;
 	my @list = $what.comb(/\d+/);
 	for @list -> $elem {
 		if %attrs.reverse.exists($elem) {
-			@res.push(%attrs.reverse{$elem})
+			@res.push: %attrs.reverse{$elem}
 		} else {
 			die("No such sequence: {'\e[' ~ $elem ~ 'm'}")
 		}
