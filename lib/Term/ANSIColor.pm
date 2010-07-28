@@ -144,3 +144,5 @@ appropriate escape sequences. The following constants are available:
 	RESET BOLD UNDERLINE INVERSE BOLD_OFF UNDERLINE_OFF INVERSE_OFF
 
 =end pod
+
+# vim: ft=perl6
