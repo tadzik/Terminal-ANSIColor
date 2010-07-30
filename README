@@ -1,5 +1,2 @@
-This is a Perl 6 port of Term::ANSIColor.
-So far it allows "constants" (they're not true constants at the moment),
-like BOLD, UNDERLINE and so, and functions color() and colored().
-More will come, as well as the documentation.
-For example usage, see example.pl
+This is a Term::ANSIColor module for Perl 6.
+For example usage, see example.pl or SYNOPSIS in the Pod.

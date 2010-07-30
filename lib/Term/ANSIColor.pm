@@ -1,6 +1,6 @@
 use v6;
 
-module Term::ANSIColor;
+module Term::ANSIColor:<github:tadzik 0.1>;
 
 # these will be macros one day, yet macros can't be exported so far
 sub RESET         is export { "\e[0m"  }
