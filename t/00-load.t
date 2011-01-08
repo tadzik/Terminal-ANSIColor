@@ -4,4 +4,4 @@ use Term::ANSIColor;
 
 ok 1, 'Module loaded';
 
-done_testing;
+done;
