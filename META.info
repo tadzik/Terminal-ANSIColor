@@ -1,0 +1,8 @@
+{
+    "name"        : "Term::ANSIColor",
+    "version"     : "*",
+    "description" : "Colorize terminal output",
+    "depends"     : [],
+    "repo-type"   : "git",
+    "repo-url"    : "git://github.com/tadzik/perl6-Term-ANSIColor.git"
+}
