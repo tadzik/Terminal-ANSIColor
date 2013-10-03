@@ -39,7 +39,7 @@ sub color (Str $what) is export {
 	my @res;
 	my @a = $what.split(' ');
 	for @a -> $attr {
-		if %attrs.exists($attr) {
+		if %attrs{$attr}:exists {
 			@res.push: %attrs{$attr}
 		} else {
 			die("Invalid attribute name '$attr'")
@@ -54,7 +54,7 @@ sub colored (Str $what, Str $how) is export {
 
 sub colorvalid (*@a) is export {
 	for @a -> $el {
-		return False unless %attrs.exists($el)
+		return False unless %attrs{$el}:exists
 	}
 	return True;
 }
@@ -71,7 +71,7 @@ sub uncolor (Str $what) is export {
 	my @res;
 	my @list = $what.comb(/\d+/);
 	for @list -> $elem {
-		if %attrs.reverse.exists($elem) {
+		if %attrs.reverse{$elem}:exists {
 			@res.push: %attrs.reverse{$elem}
 		} else {
 			die("Bad escape sequence: {'\e[' ~ $elem ~ 'm'}")
