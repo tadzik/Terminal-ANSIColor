@@ -90,7 +90,7 @@ Term::ANSIColor - Color screen output using ANSI escape sequences
 
 	use Term::ANSIColor;
 	say color('bold'), "this is in bold", color('reset');
-	say colored('underline red on_green', 'what a lovely colours!');
+	say colored('what a lovely colours!', 'underline red on_green');
 	say BOLD, 'good to be fat!', BOLD_OFF;
 	say 'ok' if colorvalid('magenta', 'on_black', 'inverse');
 	say '\e[36m is ', uncolor('\e36m');
@@ -116,8 +116,8 @@ The on_* family of colors correspond to the background colors.
 =head2 C<colored()>
 
 C<colored()> is similar to C<color()>. It takes two Str arguments,
-where the first is the colors to be used, and the second is the string
-to be colored. The C<reset> sequence is automagically placed after
+where the first is the string to be colored, and the second is the
+colors to be used. The C<reset> sequence is automagically placed after
 the string.
 
 =head2 C<colorvalid()>
