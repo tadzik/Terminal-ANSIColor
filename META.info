@@ -2,6 +2,14 @@
     "name"        : "Term::ANSIColor",
     "version"     : "*",
     "description" : "Colorize terminal output",
-    "depends"     : [],
+    "build-depends" : [ ],
+    "test-depends" : [
+        "nqp",
+        "Test"
+    ],
+    "depends" : [ ],
+    "provides" : {
+        "Term::ANSIColor" : "lib/Term/ANSIColor.pm"
+    },
     "source-url"  : "git://github.com/tadzik/perl6-Term-ANSIColor.git"
 }
