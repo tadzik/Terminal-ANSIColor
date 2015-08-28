@@ -11,5 +11,16 @@
     "provides" : {
         "Term::ANSIColor" : "lib/Term/ANSIColor.pm"
     },
+    "authors" : [
+        "Tadeusz “tadzik” Sośnierz",
+        "jnthn",
+        "Steve Mynott",
+        "timo",
+        "Tobias Leich"
+    ],
+    "support" : {
+        "bugtracker" : "https://github.com/tadzik/perl6-Term-ANSIColor/issues",
+        "source" : "git://github.com/tadzik/perl6-Term-ANSIColor.git"
+    },
     "source-url"  : "git://github.com/tadzik/perl6-Term-ANSIColor.git"
 }
