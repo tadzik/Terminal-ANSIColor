@@ -1,5 +1,5 @@
 {
-    "name"        : "Term::ANSIColor",
+    "name"        : "Terminal::ANSIColor",
     "version"     : "*",
     "description" : "Colorize terminal output",
     "build-depends" : [ ],
@@ -9,7 +9,7 @@
     ],
     "depends" : [ ],
     "provides" : {
-        "Term::ANSIColor" : "lib/Term/ANSIColor.pm"
+        "Terminal::ANSIColor" : "lib/Terminal/ANSIColor.pm"
     },
     "authors" : [
         "Tadeusz “tadzik” Sośnierz",
@@ -19,8 +19,8 @@
         "Tobias Leich"
     ],
     "support" : {
-        "bugtracker" : "https://github.com/tadzik/perl6-Term-ANSIColor/issues",
-        "source" : "git://github.com/tadzik/perl6-Term-ANSIColor.git"
+        "bugtracker" : "https://github.com/tadzik/Terminal-ANSIColor/issues",
+        "source" : "git://github.com/tadzik/Terminal-ANSIColor.git"
     },
-    "source-url"  : "git://github.com/tadzik/perl6-Term-ANSIColor.git"
+    "source-url"  : "git://github.com/tadzik/Terminal-ANSIColor.git"
 }

@@ -1,6 +1,6 @@
 use v6;
 
-unit module Term::ANSIColor;
+unit module Terminal::ANSIColor;
 
 # these will be macros one day, yet macros can't be exported so far
 sub RESET         is export { "\e[0m"  }
@@ -11,7 +11,7 @@ sub BOLD_OFF      is export { "\e[22m" }
 sub UNDERLINE_OFF is export { "\e[24m" }
 sub INVERSE_OFF   is export { "\e[27m" }
 
-my %attrs = 
+my %attrs =
 	reset      => "0",
 	bold       => "1",
 	underline  => "4",
@@ -84,11 +84,11 @@ sub uncolor (Str $what) is export {
 
 =head1 NAME
 
-Term::ANSIColor - Color screen output using ANSI escape sequences
+Terminal::ANSIColor - Color screen output using ANSI escape sequences
 
 =head1 SYNOPSIS
 
-	use Term::ANSIColor;
+	use Terminal::ANSIColor;
 	say color('bold'), "this is in bold", color('reset');
 	say colored('what a lovely colours!', 'underline red on_green');
 	say BOLD, 'good to be fat!', BOLD_OFF;
@@ -98,7 +98,7 @@ Term::ANSIColor - Color screen output using ANSI escape sequences
 
 =head1 DESCRIPTION
 
-Term::ANSIColor provides an interface for using colored output
+Terminal::ANSIColor provides an interface for using colored output
 in terminals. The following functions are available:
 
 =head2 C<color()>
@@ -138,7 +138,7 @@ color names. E.g. passing "\e[36;44m" will result in "cyan on_blue".
 
 =head1 Constants
 
-C<Term::ANSIColor> provides constants which are just strings of
+C<Terminal::ANSIColor> provides constants which are just strings of
 appropriate escape sequences. The following constants are available:
 
 	RESET BOLD UNDERLINE INVERSE BOLD_OFF UNDERLINE_OFF INVERSE_OFF
