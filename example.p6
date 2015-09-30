@@ -1,5 +1,5 @@
 use v6;
-use Term::ANSIColor;
+use Terminal::ANSIColor;
 
 # constants. Should not be exported by default, TBD
 say BOLD, "Oh, so good to be fat!", RESET;
