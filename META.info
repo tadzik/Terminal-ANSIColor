@@ -1,4 +1,5 @@
 {
+    "perl"        : "6.*",
     "name"        : "Terminal::ANSIColor",
     "version"     : "*",
     "description" : "Colorize terminal output",
