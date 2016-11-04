@@ -127,14 +127,21 @@ as specified. The following color names are recognised:
 	magenta cyan white default on_black on_red on_green on_yellow
 	on_blue on_magenta on_cyan on_white on_default
 
-The on_* family of colors correspond to the background colors.
+The on_* family of colors correspond to the background colors.	One or
+three numeric color values in the range 0..255 may also be specified:
+
+	N	  # 256-color map: 8 default + 8 bright + 216 rgb cube + 24 gray
+	on_N	  # Same, but background
+
+	N,N,N	  # 24-bit r,g,b foreground color
+	on_N,N,N  # 24-bit r,g,b background color
 
 =head2 C<colored()>
 
 C<colored()> is similar to C<color()>. It takes two Str arguments,
 where the first is the string to be colored, and the second is the
-colors to be used. The C<reset> sequence is automagically placed after
-the string.
+(space-separated) colors to be used. The C<reset> sequence is
+automagically placed after the string.
 
 =head2 C<colorvalid()>
 
@@ -144,8 +151,8 @@ false otherwise.
 
 =head2 C<colorstrip()>
 
-C<colorstrip>, given a string, removes all the escape sequences
-in it, leaving the plain text without effects.
+C<colorstrip>, given a string, removes all the color escape sequences
+in it, leaving the plain text without color effects.
 
 =head2 C<uncolor()>
 
