@@ -41,6 +41,12 @@ sub color (Str $what) is export {
 	for @a -> $attr {
 		if %attrs{$attr}:exists {
 			@res.push: %attrs{$attr}
+		} elsif $attr ~~ /^ ('on_'?) (\d+ [ ',' \d+ ',' \d+ ]?) $/ {
+			@res.push: ~$0 ?? '48' !! '38';
+			my @nums = $1.split(',');
+			die("Invalid color value $_") unless +$_ <= 255 for @nums;
+			@res.push: @nums == 3 ?? '2' !! '5';
+			@res.append: @nums;
 		} else {
 			die("Invalid attribute name '$attr'")
 		}
@@ -55,6 +61,8 @@ sub colored (Str $what, Str $how) is export {
 sub colorvalid (*@a) is export {
 	for @a -> $el {
 		return False unless %attrs{$el}:exists
+			|| $el ~~ /^ 'on_'? (\d+ [ ',' \d+ ',' \d+ ]?) $/
+				&& all($0.split(',')) <= 255;
 	}
 	return True;
 }
@@ -70,9 +78,17 @@ sub colorstrip (*@a) is export {
 sub uncolor (Str $what) is export {
 	my @res;
 	my @list = $what.comb(/\d+/);
-	for @list -> $elem {
-		if %attrs.reverse{$elem}:exists {
-			@res.push: %attrs.reverse{$elem}
+	my %inv = %attrs.invert;
+	while @list {
+		my $elem = @list.shift;
+		if %inv{$elem}:exists {
+			@res.push: %inv{$elem}
+		} elsif $elem eq '38'|'48' {
+			my $type = @list.shift;
+			die("Bad extended color type $type") unless $type eq '5'|'2';
+			my @nums = @list.splice(0, $type eq '5' ?? 1 !! 3);
+			die("Invalid color value $_") unless +$_ <= 255 for @nums;
+			@res.push: ('on_' if $elem eq '48') ~ @nums.join(',')
 		} else {
 			die("Bad escape sequence: {'\e[' ~ $elem ~ 'm'}")
 		}
