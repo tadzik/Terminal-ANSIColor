@@ -5,7 +5,6 @@
     "description" : "Colorize terminal output",
     "build-depends" : [ ],
     "test-depends" : [
-        "nqp",
         "Test"
     ],
     "depends" : [ ],
