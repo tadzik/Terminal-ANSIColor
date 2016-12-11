@@ -1,7 +1,7 @@
 {
     "perl"        : "6.*",
     "name"        : "Terminal::ANSIColor",
-    "version"     : "*",
+    "version"     : "0.2",
     "description" : "Colorize terminal output",
     "build-depends" : [ ],
     "test-depends" : [
