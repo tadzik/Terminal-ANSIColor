@@ -3,13 +3,13 @@ use v6;
 unit module Terminal::ANSIColor;
 
 # these will be macros one day, yet macros can't be exported so far
-sub RESET         is export { "\e[0m"  }
-sub BOLD          is export { "\e[1m"  }
-sub UNDERLINE     is export { "\e[4m"  }
-sub INVERSE       is export { "\e[7m"  }
-sub BOLD_OFF      is export { "\e[22m" }
-sub UNDERLINE_OFF is export { "\e[24m" }
-sub INVERSE_OFF   is export { "\e[27m" }
+our sub RESET         is export { "\e[0m"  }
+our sub BOLD          is export { "\e[1m"  }
+our sub UNDERLINE     is export { "\e[4m"  }
+our sub INVERSE       is export { "\e[7m"  }
+our sub BOLD_OFF      is export { "\e[22m" }
+our sub UNDERLINE_OFF is export { "\e[24m" }
+our sub INVERSE_OFF   is export { "\e[27m" }
 
 my %attrs =
 	reset      => "0",
@@ -35,7 +35,7 @@ my %attrs =
 	on_white   => "47",
 	on_default => "49";
 
-sub color (Str $what) is export {
+our sub color (Str $what) is export {
 	my @res;
 	my @a = $what.split(' ');
 	for @a -> $attr {
@@ -54,11 +54,11 @@ sub color (Str $what) is export {
 	return "\e[" ~ @res.join(';') ~ "m";
 }
 
-sub colored (Str $what, Str $how) is export {
+our sub colored (Str $what, Str $how) is export {
 	color($how) ~ $what ~ color('reset');
 }
 
-sub colorvalid (*@a) is export {
+our sub colorvalid (*@a) is export {
 	for @a -> $el {
 		return False unless %attrs{$el}:exists
 			|| $el ~~ /^ 'on_'? (\d+ [ ',' \d+ ',' \d+ ]?) $/
@@ -67,7 +67,7 @@ sub colorvalid (*@a) is export {
 	return True;
 }
 
-sub colorstrip (*@a) is export {
+our sub colorstrip (*@a) is export {
 	my @res;
 	for @a -> $str {
 		@res.push: $str.subst(/\e\[ <[0..9;]>+ m/, '', :g);
@@ -75,7 +75,7 @@ sub colorstrip (*@a) is export {
 	return @res.join;
 }
 
-sub uncolor (Str $what) is export {
+our sub uncolor (Str $what) is export {
 	my @res;
 	my @list = $what.comb(/\d+/);
 	my %inv = %attrs.invert;
