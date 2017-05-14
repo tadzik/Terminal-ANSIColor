@@ -3,6 +3,7 @@ use Terminal::ANSIColor;
 
 # constants. Should not be exported by default, TBD
 say BOLD, "Oh, so good to be fat!", RESET;
+say ITALIC, "Oh, so good to be leaning!", ITALIC_OFF;
 say color('underline red on_yellow'),
 	"Hey, isn't it awesome?", color('reset');
 say colored("IM IN UR MODULE MESSING WITH UR COLOURS",

@@ -10,6 +10,8 @@ sub INVERSE       is export { "\e[7m"  }
 sub BOLD_OFF      is export { "\e[22m" }
 sub UNDERLINE_OFF is export { "\e[24m" }
 sub INVERSE_OFF   is export { "\e[27m" }
+sub ITALIC        is export { "\e[3m"  }
+sub ITALIC_OFF    is export { "\e[23m"  }
 
 my %attrs =
 	reset      => "0",
