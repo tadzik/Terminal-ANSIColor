@@ -2,16 +2,16 @@ use v6;
 
 unit module Terminal::ANSIColor;
 
-# these will be macros one day, yet macros can't be exported so far
-sub RESET         is export { "\e[0m"  }
-sub BOLD          is export { "\e[1m"  }
-sub UNDERLINE     is export { "\e[4m"  }
-sub INVERSE       is export { "\e[7m"  }
-sub BOLD_OFF      is export { "\e[22m" }
-sub UNDERLINE_OFF is export { "\e[24m" }
-sub INVERSE_OFF   is export { "\e[27m" }
-sub ITALIC        is export { "\e[3m"  }
-sub ITALIC_OFF    is export { "\e[23m"  }
+
+my constant RESET         is export = "\e[0m";
+my constant BOLD          is export = "\e[1m";
+my constant UNDERLINE     is export = "\e[4m";
+my constant INVERSE       is export = "\e[7m";
+my constant BOLD_OFF      is export = "\e[22m";
+my constant UNDERLINE_OFF is export = "\e[24m";
+my constant INVERSE_OFF   is export = "\e[27m";
+my constant ITALIC        is export = "\e[3m";
+my constant ITALIC_OFF    is export = "\e[23m";
 
 my %attrs =
 	reset      => "0",
