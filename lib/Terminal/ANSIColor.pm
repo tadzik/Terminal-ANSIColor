@@ -39,7 +39,7 @@ my %attrs =
 
 sub color (Str $what) is export {
 	my @res;
-	my @a = $what.split(' ');
+	my @a = $what.words;
 	for @a -> $attr {
 		if %attrs{$attr}:exists {
 			@res.push: %attrs{$attr}
