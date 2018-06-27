@@ -2,7 +2,7 @@
     "perl"        : "6.*",
     "name"        : "Terminal::ANSIColor",
     "license"     : "MIT",
-    "version"     : "0.4",
+    "version"     : "0.5",
     "description" : "Colorize terminal output",
     "build-depends" : [ ],
     "test-depends" : [
