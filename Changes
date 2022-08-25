@@ -1,0 +1,5 @@
+Revision history for snip
+
+{{$NEXT}}
+    - Initial version on the zef ecosystem
+    - Use proper constants for export

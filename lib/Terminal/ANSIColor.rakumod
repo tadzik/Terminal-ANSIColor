@@ -1,19 +1,15 @@
-use v6;
-
-unit module Terminal::ANSIColor;
-
 # these will be macros one day, yet macros can't be exported so far
-sub RESET         is export { "\e[0m"  }
-sub BOLD          is export { "\e[1m"  }
-sub ITALIC        is export { "\e[3m"  }
-sub UNDERLINE     is export { "\e[4m"  }
-sub INVERSE       is export { "\e[7m"  }
-sub BOLD_OFF      is export { "\e[22m" }
-sub ITALIC_OFF    is export { "\e[23m"  }
-sub UNDERLINE_OFF is export { "\e[24m" }
-sub INVERSE_OFF   is export { "\e[27m" }
+my constant RESET is export = "\e[0m";
+my constant BOLD          is export = "\e[1m";
+my constant ITALIC        is export = "\e[3m";
+my constant UNDERLINE     is export = "\e[4m";
+my constant INVERSE       is export = "\e[7m";
+my constant BOLD_OFF      is export = "\e[22m";
+my constant ITALIC_OFF    is export = "\e[23m";
+my constant UNDERLINE_OFF is export = "\e[24m";
+my constant INVERSE_OFF   is export = "\e[27m";
 
-my %attrs =
+my constant %attrs =
 	reset      => "0",
 	bold       => "1",
 	italic     => "3",
@@ -38,7 +34,7 @@ my %attrs =
 	on_white   => "47",
 	on_default => "49";
 
-sub color (Str $what) is export {
+sub color(Str $what) is export {
 	my @res;
 	my @a = $what.words;
 	for @a -> $attr {
@@ -54,7 +50,7 @@ sub color (Str $what) is export {
 			die("Invalid attribute name '$attr'")
 		}
 	}
-	return "\e[" ~ @res.join(';') ~ "m";
+	"\e[" ~ @res.join(';') ~ "m"
 }
 
 sub colored (Str $what, Str $how) is export {
@@ -67,7 +63,7 @@ sub colorvalid (*@a) is export {
 			|| $el ~~ /^ 'on_'? (\d+ [ ',' \d+ ',' \d+ ]?) $/
 				&& all($0.split(',')) <= 255;
 	}
-	return True;
+	True
 }
 
 sub colorstrip (*@a) is export {
@@ -75,7 +71,7 @@ sub colorstrip (*@a) is export {
 	for @a -> $str {
 		@res.push: $str.subst(/\e\[ <[0..9;]>+ m/, '', :g);
 	}
-	return @res.join;
+	@res.join
 }
 
 sub uncolor (Str $what) is export {
@@ -96,7 +92,7 @@ sub uncolor (Str $what) is export {
 			die("Bad escape sequence: {'\e[' ~ $elem ~ 'm'}")
 		}
 	}
-	return @res.join(' ');
+	@res.join(' ')
 }
 
 =begin pod
@@ -107,20 +103,25 @@ Terminal::ANSIColor - Color screen output using ANSI escape sequences
 
 =head1 SYNOPSIS
 
-	use Terminal::ANSIColor;
-	say color('bold'), "this is in bold", color('reset');
-	say colored('what a lovely colours!', 'underline red on_green');
-	say BOLD, 'good to be fat!', BOLD_OFF;
-	say 'ok' if colorvalid('magenta', 'on_black', 'inverse');
-	say '\e[36m is ', uncolor('\e36m');
-	say colorstrip("\e[1mThis is bold\e[0m");
+=begin code :lang<raku>
+
+use Terminal::ANSIColor;
+
+say color('bold'), "this is in bold", color('reset');
+say colored('what a lovely colours!', 'underline red on_green');
+say BOLD, 'good to be fat!', BOLD_OFF;
+say 'ok' if colorvalid('magenta', 'on_black', 'inverse');
+say '\e[36m is ', uncolor('\e36m');
+say colorstrip("\e[1mThis is bold\e[0m");
+
+=end code
 
 =head1 DESCRIPTION
 
 Terminal::ANSIColor provides an interface for using colored output
 in terminals. The following functions are available:
 
-=head2 C<color()>
+=head2 color
 
 Given a string with color names, the output produced by C<color()>
 sets the terminal output so the text printed after it will be colored
@@ -139,25 +140,25 @@ three numeric color values in the range 0..255 may also be specified:
 	N,N,N	  # 24-bit r,g,b foreground color
 	on_N,N,N  # 24-bit r,g,b background color
 
-=head2 C<colored()>
+=head2 colored
 
 C<colored()> is similar to C<color()>. It takes two Str arguments,
 where the first is the string to be colored, and the second is the
 (space-separated) colors to be used. The C<reset> sequence is
 automagically placed after the string.
 
-=head2 C<colorvalid()>
+=head2 colorvalid
 
 C<colorvalid()> gets an array of color specifications (like those
 passed to C<color()>) and returns true if all of them are valid,
 false otherwise.
 
-=head2 C<colorstrip()>
+=head2 colorstrip
 
 C<colorstrip>, given a string, removes all the color escape sequences
 in it, leaving the plain text without color effects.
 
-=head2 C<uncolor()>
+=head2 uncolor
 
 Given escape sequences, C<uncolor()> returns a string with readable
 color names. E.g. passing "\e[36;44m" will result in "cyan on_blue".

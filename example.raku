@@ -1,4 +1,3 @@
-use v6;
 use Terminal::ANSIColor;
 
 # constants. Should not be exported by default, TBD
@@ -19,4 +18,4 @@ say colorstrip($psych);
 my $escapes = color('255,255,0 on_187,0,0');
 my $description = uncolor($escapes);
 say "'$description' encodes to:";
-say $escapes.perl;
+say $escapes.raku;
