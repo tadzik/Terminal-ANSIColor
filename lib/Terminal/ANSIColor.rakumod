@@ -1,5 +1,5 @@
 # these will be macros one day, yet macros can't be exported so far
-my constant RESET is export = "\e[0m";
+my constant RESET         is export = "\e[0m";
 my constant BOLD          is export = "\e[1m";
 my constant ITALIC        is export = "\e[3m";
 my constant UNDERLINE     is export = "\e[4m";
@@ -170,6 +170,27 @@ appropriate escape sequences. The following constants are available:
 
 	RESET BOLD UNDERLINE INVERSE BOLD_OFF UNDERLINE_OFF INVERSE_OFF
 
+=head1 AUTHORS
+
+Tadeusz “tadzik” Sośnierz
+
+Elizabeth Mattijsen <liz@raku.rocks>
+
+Source can be located at: https://github.com/tadzik/Terminal-ANSIColor .
+Comments and Pull Requests are welcome.
+
+If you like this module, or what I’m doing more generally, committing to a
+L<small sponsorship|https://github.com/sponsors/lizmat/>  would mean a great
+deal to me!
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2010 - 2018 Tadeusz “tadzik” Sośnierz
+
+Copyright 2022 Elizabeth Mattijsen
+
+This library is free software; you can redistribute it and/or modify it under the MIT License.
+
 =end pod
 
-# vim: ft=perl6
+# vim: expandtab shiftwidth=4

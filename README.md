@@ -10,6 +10,7 @@ SYNOPSIS
 
 ```raku
 use Terminal::ANSIColor;
+
 say color('bold'), "this is in bold", color('reset');
 say colored('what a lovely colours!', 'underline red on_green');
 say BOLD, 'good to be fat!', BOLD_OFF;
@@ -66,4 +67,24 @@ Constants
 `Terminal::ANSIColor` provides constants which are just strings of appropriate escape sequences. The following constants are available:
 
     RESET BOLD UNDERLINE INVERSE BOLD_OFF UNDERLINE_OFF INVERSE_OFF
+
+AUTHORS
+=======
+
+Tadeusz “tadzik” Sośnierz
+
+Elizabeth Mattijsen <liz@raku.rocks>
+
+Source can be located at: https://github.com/tadzik/Terminal-ANSIColor . Comments and Pull Requests are welcome.
+
+If you like this module, or what I’m doing more generally, committing to a [small sponsorship](https://github.com/sponsors/lizmat/) would mean a great deal to me!
+
+COPYRIGHT AND LICENSE
+=====================
+
+Copyright 2010 - 2018 Tadeusz “tadzik” Sośnierz
+
+Copyright 2022 Elizabeth Mattijsen
+
+This library is free software; you can redistribute it and/or modify it under the MIT License.
 

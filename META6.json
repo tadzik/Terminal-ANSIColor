@@ -2,10 +2,6 @@
   "auth": "zef:lizmat",
   "authors": [
     "Tadeusz “tadzik” Sośnierz",
-    "Jonathan Worthington",
-    "Steve Mynott",
-    "Timo Paulssen",
-    "Tobias Leich",
     "Elizabeth Mattijsen"
   ],
   "build-depends": [
@@ -15,7 +11,7 @@
   "description": "Color screen output using ANSI escape sequences",
   "license": "MIT",
   "name": "Terminal::ANSIColor",
-  "perl": "6.*",
+  "perl": "6.d",
   "provides": {
     "Terminal::ANSIColor": "lib/Terminal/ANSIColor.rakumod"
   },
@@ -25,6 +21,11 @@
   "support": {
   },
   "tags": [
+    "TERMINAL",
+    "TERM",
+    "COLOR",
+    "ANSI",
+    "ESCAPE"
   ],
   "test-depends": [
     "Test"
