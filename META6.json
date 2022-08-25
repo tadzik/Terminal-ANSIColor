@@ -28,7 +28,6 @@
     "ESCAPE"
   ],
   "test-depends": [
-    "Test"
   ],
   "version": "0.6"
 }
