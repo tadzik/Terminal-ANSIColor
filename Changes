@@ -2,6 +2,11 @@ Revision history for Terminal::ANSIColor
 
 {{$NEXT}}
 
+0.7  2022-08-26T00:45:06+02:00
+    - Restore the old "sub" based interface, as there is code out
+      there that depends on being able to say BOLD() instead of
+      BOLD
+
 0.6  2022-08-25T11:54:01+02:00
     - Initial version on the zef ecosystem
     - Use proper constants for export

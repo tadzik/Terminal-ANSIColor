@@ -9,6 +9,17 @@ my constant ITALIC_OFF    is export = "\e[23m";
 my constant UNDERLINE_OFF is export = "\e[24m";
 my constant INVERSE_OFF   is export = "\e[27m";
 
+# legacy interface
+my sub RESET()         is export { "\e[0m"  }
+my sub BOLD()          is export { "\e[1m"  }
+my sub ITALIC()        is export { "\e[3m"  }
+my sub UNDERLINE()     is export { "\e[4m"  }
+my sub INVERSE()       is export { "\e[7m"  }
+my sub BOLD_OFF()      is export { "\e[22m" }
+my sub ITALIC_OFF()    is export { "\e[23m" }
+my sub UNDERLINE_OFF() is export { "\e[24m" }
+my sub INVERSE_OFF()   is export { "\e[27m" }
+
 my constant %attrs =
 	reset      => "0",
 	bold       => "1",
