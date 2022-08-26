@@ -1,3 +1,5 @@
+unit module Terminal::ANSIColor;
+
 # these will be macros one day, yet macros can't be exported so far
 my constant RESET         is export = "\e[0m";
 my constant BOLD          is export = "\e[1m";
@@ -10,15 +12,15 @@ my constant UNDERLINE_OFF is export = "\e[24m";
 my constant INVERSE_OFF   is export = "\e[27m";
 
 # legacy interface
-sub RESET()         is export { "\e[0m"  }
-sub BOLD()          is export { "\e[1m"  }
-sub ITALIC()        is export { "\e[3m"  }
-sub UNDERLINE()     is export { "\e[4m"  }
-sub INVERSE()       is export { "\e[7m"  }
-sub BOLD_OFF()      is export { "\e[22m" }
-sub ITALIC_OFF()    is export { "\e[23m" }
-sub UNDERLINE_OFF() is export { "\e[24m" }
-sub INVERSE_OFF()   is export { "\e[27m" }
+my sub RESET()         is export { "\e[0m"  }
+my sub BOLD()          is export { "\e[1m"  }
+my sub ITALIC()        is export { "\e[3m"  }
+my sub UNDERLINE()     is export { "\e[4m"  }
+my sub INVERSE()       is export { "\e[7m"  }
+my sub BOLD_OFF()      is export { "\e[22m" }
+my sub ITALIC_OFF()    is export { "\e[23m" }
+my sub UNDERLINE_OFF() is export { "\e[24m" }
+my sub INVERSE_OFF()   is export { "\e[27m" }
 
 my constant %attrs =
 	reset      => "0",
@@ -45,7 +47,7 @@ my constant %attrs =
 	on_white   => "47",
 	on_default => "49";
 
-sub color(Str $what) is export {
+my sub color(Str $what) is export {
 	my @res;
 	my @a = $what.words;
 	for @a -> $attr {
@@ -64,11 +66,11 @@ sub color(Str $what) is export {
 	"\e[" ~ @res.join(';') ~ "m"
 }
 
-sub colored (Str $what, Str $how) is export {
+my sub colored (Str $what, Str $how) is export {
 	color($how) ~ $what ~ color('reset');
 }
 
-sub colorvalid (*@a) is export {
+my sub colorvalid (*@a) is export {
 	for @a -> $el {
 		return False unless %attrs{$el}:exists
 			|| $el ~~ /^ 'on_'? (\d+ [ ',' \d+ ',' \d+ ]?) $/
@@ -77,7 +79,7 @@ sub colorvalid (*@a) is export {
 	True
 }
 
-sub colorstrip (*@a) is export {
+my sub colorstrip (*@a) is export {
 	my @res;
 	for @a -> $str {
 		@res.push: $str.subst(/\e\[ <[0..9;]>+ m/, '', :g);
@@ -85,7 +87,7 @@ sub colorstrip (*@a) is export {
 	@res.join
 }
 
-sub uncolor (Str $what) is export {
+my sub uncolor (Str $what) is export {
 	my @res;
 	my @list = $what.comb(/\d+/);
 	my %inv = %attrs.invert;

@@ -2,6 +2,9 @@ Revision history for Terminal::ANSIColor
 
 {{$NEXT}}
 
+0.9  2022-08-26T11:25:38+02:00
+    - AAAhhhhh... it actually needs the module statement.  Sigh
+
 0.8  2022-08-26T11:18:24+02:00
     - Also restore subs being "our" because of legacy issues
 
