@@ -2,6 +2,9 @@ Revision history for Terminal::ANSIColor
 
 {{$NEXT}}
 
+0.8  2022-08-26T11:18:24+02:00
+    - Also restore subs being "our" because of legacy issues
+
 0.7  2022-08-26T00:45:06+02:00
     - Restore the old "sub" based interface, as there is code out
       there that depends on being able to say BOLD() instead of
