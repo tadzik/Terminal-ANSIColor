@@ -51,8 +51,8 @@ my sub color(Str $what) is export {
 	my @res;
 	my @a = $what.words;
 	for @a -> $attr {
-		if %attrs{$attr}:exists {
-			@res.push: %attrs{$attr}
+		if %attrs.EXISTS-KEY($attr) {
+			@res.push: %attrs.AT-KEY($attr);
 		} elsif $attr ~~ /^ ('on_'?) (\d+ [ ',' \d+ ',' \d+ ]?) $/ {
 			@res.push: ~$0 ?? '48' !! '38';
 			my @nums = $1.split(',');
